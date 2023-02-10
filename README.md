@@ -10,11 +10,10 @@ Ergbnis sind CSV Dateien mit Salden und Umsätzen pro Gruppenname, diese können
 
 ## Disclaimer
 
-**Es handelt sich um ein reines Hobby-Projekte.**|
-**Es wird keine Garantie für Fehlerfreiheit, (umfangreichen) Support, Realisierung von individuellen Wünschen oder zeitnahe Unterstützung geben!**|
+**Es handelt sich um ein reines Hobby-Projekte.**
+**Es wird keine Garantie für Fehlerfreiheit, (umfangreichen) Support, Realisierung von individuellen Wünschen oder zeitnahe Unterstützung geben!**
 **Die genannten Produkt- und Markennamen sind Eigentum der jeweilingen Inhaber**
 
-<br>
 
 ## Anforderung
 
