@@ -25,8 +25,8 @@ Zum Lesen der PDF Finanzreports wird die Python Bibliothek [pdfplumber](https://
 ## Installation
 
 1. Download [Python 3.11+](https://www.python.org/)
-2. Unter Windows: Kommandozeilenfenster öffnen („Windows-Taste“ + „R“ starten. Dort den Befehl „cmd.exe“ eingeben und mit „Enter“ bestätigen)
-   Alle weiteren Schritte sind im Kommandozeilenfenster auszuführen.
+2. Unter Windows: Kommandozeilenfenster öffnen („Windows-Taste“ + „R“ starten. Dort den Befehl „cmd.exe“ eingeben und mit „Enter“ bestätigen),
+   alle weiteren Schritte sind im Kommandozeilenfenster auszuführen.
 3. Python version prüfen mit dem Aufruf: python --version
 4. Python Aktualisierung mit dem Aufruf: pip install update
 5. pdfplumber installieren: pip install pdfplumber
