@@ -59,7 +59,9 @@ com_fm.py und com_fm.ini müssen sich im gleichen Verzeichnis befinden.<br>
 
 ```sh
 python com_fm.py
-
+```
+Laufzeit Ausgaben:
+```sh
 Finanzreport_Nr._01_per_03.02.2020.pdf saldo delta 0.0
 Finanzreport_Nr._02_per_02.03.2020.pdf saldo delta 0.0
 ...
