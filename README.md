@@ -44,7 +44,8 @@ Die Datei [com_fm.ini](com_fm.ini) enthält alle zur individuellen Anpassung not
 | Gruppenname : Schlüsselwort1,Schlüsselwort2,... z.B.:<br>Online Ausgaben : paypal,amazon,internet,online | Unter dem Gruppenname werden alle Einnahmen und Ausgaben zusammengefasst 
 deren Text eines der nachfolgenden Schlüsselwörter enthält. |
 
-com_fm.ini einthält bereits Beispiel Gruppennamen und Schlüsselwörter, die individuell erweitert oder angepasst werden können. Hierbei ist zu beachten: Die Trennung zwischen pfad, jahr und Gruppennamen ist " : " (ein Leerzeichen vor und nach dem Doppelpunkt). Die Schlüsselwörter (klein geschrieben) ohne Leerzeichen mit Komma getrennt. 
+com_fm.ini einthält bereits Beispiel Gruppennamen und Schlüsselwörter, die individuell erweitert oder angepasst werden können. Hierbei ist zu beachten: Die Trennung zwischen pfad, jahr und Gruppennamen ist " : " (ein Leerzeichen vor und nach dem Doppelpunkt). Die Schlüsselwörter (klein geschrieben) ohne Leerzeichen mit Komma getrennt.
+com_fm.ini wird in der Reihenfolge der Eintragung durchsucht. Beachte, dass sehr kurze Schlüsselwörte spätere längere Schlüsselwörter unterdrücken können. So verhindert das Schlüsselwort "markt" z.B. das Auffinden von "kaufmarkt".
 
 ## Aufbau der Finanzreports
 
