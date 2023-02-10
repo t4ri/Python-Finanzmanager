@@ -41,8 +41,10 @@ Die Datei [com_fm.ini](com_fm.ini) enthält alle zur individuellen Anpassung not
 |-------------------------------------------------------|------------------------------------------------------------------|
 | pfad : D:\\\\comdirect\\\\Kto1234567 | Pfad zum Ablageort der comdirect Finanzreports, doppelt "\\\\" als Verzeichnistrenner beachten! |
 | jahr : 2022 | Auswertungsjahr |
-| Gruppenname :  Schlüsselwort1 , Schlüsselwort2, ... z.B.:<br>Online Ausgaben : paypal,amazon,internet,online | Unter dem Gruppenname werden alle Einnahmen und Ausgaben zusammengefasst 
+| Gruppenname : Schlüsselwort1,Schlüsselwort2,... z.B.:<br>Online Ausgaben : paypal,amazon,internet,online | Unter dem Gruppenname werden alle Einnahmen und Ausgaben zusammengefasst 
 deren Text eines der nachfolgenden Schlüsselwörter enthält. |
+
+com_fm.ini einthält bereits Beispiel Gruppennamen und Schlüsselwörter, die individuell erweitert oder angepasst werden können. Hierbei ist zu beachten: Die Trennung zwischen pfad, jahr und Gruppennamen ist " : " (ein Leerzeichen vor und nach dem Doppelpunkt). Die Schlüsselwörter (klein geschrieben) ohne Leerzeichen mit Komma getrennt. 
 
 ## Aufbau der Finanzreports
 
