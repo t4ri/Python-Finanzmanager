@@ -48,8 +48,7 @@ com_fm.ini einthält bereits Beispiel Gruppennamen und Schlüsselwörter, die in
 
 ## Aufbau der Finanzreports
 
-Die für die Auswertung relevanten Zahlungsvorgänge beginnen auf Seite 2 des Finanzreports und startet mit dem Einlesen des Alten Saldos. Die weiteren Einnahmen und Ausgaben werden bis zum Erreichen des Neuen Saldos zeilenweise eingelesen. Hierbei wird immer nur die erste Zeile einer Buchung berücksichtigt, z.B.<br>
-02.06.2022 Lastschrift/ STADTWERKE KD.-NR.345,00-ABSCHLAG0 -91,00<br>
+Die für die Auswertung relevanten Zahlungsvorgänge beginnen auf Seite 2 des Finanzreports und startet mit dem Einlesen des Alten Saldos. Die weiteren Einnahmen und Ausgaben werden bis zum Erreichen des Neuen Saldos zeilenweise eingelesen. Hierbei wird immer nur die erste Zeile einer Buchung berücksichtigt, z.B.: 02.06.2022 Lastschrift/ STADTWERKE KD.-NR.345,00-ABSCHLAG0 -91,00<br>
 Der Text wird mit den in com_fm.ini hinterlegten Schlüsselwörtern verglichen und der Buchungsbetrag dem Gruppensaldo zugeordnet. Der Text wird beim Vergleich in Kleinbuchstaben umgewandelt, so dass Klein-/Grossschreibung keine Relevanz hat. Kann keine Zuordnung gefunden werden, so werden Einnahmen der Gruppe "Einnahmen div." und Ausgaben der Gruppe "Einnahmen div." zugeordnet. Zur Überprüfung und ggf. Ergänzung von Schlüsselwörtern in com_fm.ini werden alle Buchungen der Gruppen "Einnahmen div." und "Einnahmen div." ausgegeben. Enthält com_fm.ini keine Gruppennamen, so werden alle Einnahmen "Einnahmen div." und Ausgaben "Ausgaben div." zugeordnet.
 
 ## Aufruf
