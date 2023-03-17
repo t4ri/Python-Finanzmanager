@@ -39,7 +39,7 @@ Die Datei [com_fm.ini](com_fm.ini) enthält alle zur individuellen Anpassung not
 
 | Parameter | Beschreibung |
 |-------------------------------------------------------|------------------------------------------------------------------|
-| pfad : D:\\\\comdirect\\\\Kto1234567 | Pfad zum Ablageort der comdirect Finanzreports, doppelt "\\\\" als Verzeichnistrenner beachten! |
+| pfad : D:\\comdirect\\Kto1234567 | Pfad zum Ablageort der comdirect Finanzreports. |
 | jahr : 2022 | Auswertungsjahr |
 | Gruppenname : Schlüsselwort1,Schlüsselwort2,... z.B.:<br>Online Ausgaben : paypal,amazon,internet,online | Unter dem Gruppenname werden alle Einnahmen und Ausgaben zusammengefasst 
 deren Text eines der nachfolgenden Schlüsselwörter enthält. |
