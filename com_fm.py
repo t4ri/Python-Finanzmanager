@@ -1,9 +1,17 @@
-# t4ri, 2023
+# version
+# t4ri, 02/2024 v1.0.1 see changelog
+# t4ri, 02/2023 v1.0.0
+
+# download
+# https://github.com/t4ri/Python-Finanzmanager
+
+# import
 import pdfplumber
 # https://github.com/jsvine/pdfplumber
 import re
 import os
 
+# start
 dir = ""
 year = ""
 booking_classes = {}
@@ -50,31 +58,44 @@ def findclass(name, val):
     for key in booking_classes:
         cl = booking_classes[key]
         if isinstance(cl, str):
-            # Sammler
+            # Sammler +/-
             v = str2float(val)
             if (cl == "+") and (v >= 0):
                 return key
             elif (cl == "-") and (v < 0):
                 return key
-        else:    
+        else:               
             for attribute in cl:
                 if name.find(attribute) >= 0:
                     # Schlüsselwort gefunden
                     return key
     return None
     
+def appendBookingItem(bi):
+    overview_name = findclass(bi["name"],bi["value"])
+    if  overview_name == None:
+        overview_name = "unbekannt"                  
+    olist = []
+    if overview_name in booking_dict:
+        olist = booking_dict[overview_name]
+    olist.append(bi)
+    booking_dict[overview_name] = olist   
 
+    
 def readPDF(fname):
     # Öffne das PDF Dokument
     pdf = pdfplumber.open(fname)
     # Regulärer Filter
-    #02.06.2022 Lastschrift/ STADTWERKE KD.-NR.346,00-ABSCHLAG0 -91,00
-    preval = re.compile(r'(?P<date>[0-9]{2}.[0-9]{2}.[0-9]{4}) (?P<type>[a-zA-ZäüöÄÜÖ]*)/{0,1} (?P<text>.*) (?P<value>[+,-]([0-9]{1,3}.{0,1})*,[0-9]{2})$')
-    # AlterSaldo 01.06.2022 +1.704,05
+    #Zeile1 der Buchung, z.B. 02.06.2022 Lastschrift/ STADTWERKE KD.-NR.346,00-ABSCHLAG0 -91,00
+    preval1 = re.compile(r'(?P<date>[0-9]{2}.[0-9]{2}.[0-9]{4}) (?P<type>[a-zA-ZäüöÄÜÖ]*)/{0,1} (?P<text>.*) (?P<value>[+,-]([0-9]{1,3}.{0,1})*,[0-9]{2})$')
+    # Zeile2 der Buchung
+    preval2 = re.compile(r'(?P<date>[0-9]{2}.[0-9]{2}.[0-9]{4}) (?P<type>[a-zA-ZäüöÄÜÖ]*) (?P<text>.*)$')
+    # Zeile Saldo, z.B. AlterSaldo 01.06.2022 +1.704,05
     presaldo = re.compile(r'(?P<saldo>[a-zA-Z]*Saldo) (?P<date>[0-9]{2}.[0-9]{2}.[0-9]{4}) (?P<value>[+,-]([0-9]{1,3}.{0,1})*,[0-9]{2})$')
     p = 1
     stop = False
     saldo = 0;
+    booking_item = None
     for page in pdf.pages:
         # start ab Seite 2
         if p>1:
@@ -84,31 +105,26 @@ def readPDF(fname):
             for line in lines:
                 # Textzeile
                 info = ""
-                if preval.search(line):
+                if preval1.search(line):
                     # Regular expression Datenzeile
-                    info = str(preval.search(line).groupdict()) 
-                    saldo += str2float(preval.search(line).group("value"))
-                    name = preval.search(line).group("text")
-                    typ = preval.search(line).group("type")
+                    info = str(preval1.search(line).groupdict()) 
+                    saldo += str2float(preval1.search(line).group("value"))
+                    name = preval1.search(line).group("text")
+                    typ = preval1.search(line).group("type")
                     # Name festlegen
                     class_name = name+" "+typ
                     class_name = class_name.lower()
                     # Wertbuchung und Zuordnung
+                    if booking_item != None:
+                        appendBookingItem(booking_item)
                     booking_item = {}
-                    booking_item["date"] = preval.search(line).group("date")
+                    booking_item["date"] = preval1.search(line).group("date")
                     booking_item["name"] = class_name
-                    val = preval.search(line).group("value")
+                    val = preval1.search(line).group("value")
                     booking_item["value"] = val
-                    booking_items = []
-                    overview_name = findclass(class_name,val)
-                    if  overview_name == None:
-                        overview_name = "unbekannt"                  
-                    olist = []
-                    if overview_name in booking_dict:
-                        olist = booking_dict[overview_name]
-                    olist.append(booking_item)
-                    booking_dict[overview_name] = olist   
-                                                
+                elif preval2.search(line):
+                    text = preval2.search(line).group("text")
+                    booking_item["name"] = booking_item["name"] + ' ' + text                                            
                 elif presaldo.search(line):
                     # Regular expression Saldo
                     info = str(presaldo.search(line).groupdict())
@@ -122,8 +138,15 @@ def readPDF(fname):
                         # Saldoabweichung
                         print(fname + " saldo delta "+str(delta))
                         stop = True
+                else:
+                    # sonstige Zeilen der Buchung
+                    if booking_item != None:
+                        booking_item["name"] = booking_item["name"] + ' ' + line
                 if stop:
                     break
+            if booking_item != None:
+                appendBookingItem(booking_item)
+                booking_item = None
             if stop:
                 break
         p += 1
