@@ -11,7 +11,7 @@ All notable changes to this project will be documented in this file. The format 
 
 ### Changed
 
-- Lines 2 and 3 of the booking item are now taken into account
+- all lines of the booking item are now taken into account
 
 ### Fixed
 
