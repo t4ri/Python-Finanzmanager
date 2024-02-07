@@ -1,6 +1,6 @@
 # version
-# t4ri, 02/2024 v1.0.1 see changelog
-# t4ri, 02/2023 v1.0.0
+# t4ri.de, 02/2024 v1.0.1 see changelog
+# t4ri.de, 02/2023 v1.0.0
 
 # download
 # https://github.com/t4ri/Python-Finanzmanager
@@ -72,7 +72,7 @@ def findclass(name, val):
     return None
     
 def appendBookingItem(bi):
-    overview_name = findclass(bi["name"],bi["value"])
+    overview_name = findclass(bi["typ"] + ' / ' + bi["name"],bi["value"])
     if  overview_name == None:
         overview_name = "unbekannt"                  
     olist = []
@@ -111,20 +111,20 @@ def readPDF(fname):
                     saldo += str2float(preval1.search(line).group("value"))
                     name = preval1.search(line).group("text")
                     typ = preval1.search(line).group("type")
-                    # Name festlegen
-                    class_name = name+" "+typ
-                    class_name = class_name.lower()
                     # Wertbuchung und Zuordnung
                     if booking_item != None:
                         appendBookingItem(booking_item)
                     booking_item = {}
                     booking_item["date"] = preval1.search(line).group("date")
-                    booking_item["name"] = class_name
+                    booking_item["name"] = name.lower()
+                    booking_item["typ"] = typ.lower()
                     val = preval1.search(line).group("value")
                     booking_item["value"] = val
                 elif preval2.search(line):
                     text = preval2.search(line).group("text")
-                    booking_item["name"] = booking_item["name"] + ' ' + text                                            
+                    typ = preval2.search(line).group("type")
+                    booking_item["name"] = booking_item["name"] + ' ' + text.lower()
+                    booking_item["typ"] = booking_item["typ"] + ' ' + typ.lower()                 
                 elif presaldo.search(line):
                     # Regular expression Saldo
                     info = str(presaldo.search(line).groupdict())
@@ -141,7 +141,7 @@ def readPDF(fname):
                 else:
                     # sonstige Zeilen der Buchung
                     if booking_item != None:
-                        booking_item["name"] = booking_item["name"] + ' ' + line
+                        booking_item["name"] = booking_item["name"] + ' ' + line.lower()
                 if stop:
                     break
             if booking_item != None:
@@ -173,12 +173,14 @@ for file in files:
 res = open(year + "_finmanger.csv", 'w')
 bres = open(year + "_finmanger_bookings.csv", 'w')
 saldo=0
+res.write("Jahr;Gruppenname;Anzahl Buchungen in der Gruppe;Saldo\n")
+bres.write("Buchungsdatum;Gruppenname;Vorgang;Buchungstext;Betrag\n")
 for key in booking_dict.keys():
     l = 0
     sum = 0
     for booking in booking_dict[key]:
         sum += str2float(booking["value"])
-        bres.write(booking["date"]+";"+key+";"+booking["name"]+";"+booking["value"]+"\n")
+        bres.write(booking["date"]+";"+key+";"+booking["typ"]+';'+booking["name"]+";"+booking["value"]+"\n")
         l += 1
     sum = round(sum,2)
     saldo += sum
@@ -195,10 +197,10 @@ bres.close()
 s="Einnahmen div."
 print("\n-----------------------------\n"+s+":")
 for booking in booking_dict[s]:
-    print (booking["date"]+", "+booking["name"]+", "+booking["value"])
+    print (booking["date"]+"; "+booking["typ"]+'; '+booking["name"]+"; "+booking["value"])
     
 s="Ausgaben div."
 print("\n-----------------------------\n"+s+":")
 for booking in booking_dict[s]:
-    print (booking["date"]+", "+booking["name"]+", "+booking["value"])
+    print (booking["date"]+"; "+booking["typ"]+'; '+booking["name"]+"; "+booking["value"])
     

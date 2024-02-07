@@ -63,8 +63,8 @@ Finanzreport_Nr._02_per_02.03.2020.pdf saldo delta 0.0
 ```
 
 ## Ergebnisdateien
-Es werden zwei CSV Dateien erzeugt *jahr*_finmnanager.csv und *jahr*_finmnanager_bookings.csv. *jahr*_finmnanager.csv enthält die Gruppenübersicht und Gruppensalden mit den Spalten Jahr, Gruppenname, Anzahl Buchungen in der Gruppe, Saldo.
-*jahr*_finmnanager_bookings.csv enthält Buchungsdatum, Gruppenname, Buchungstext, Betrag.
+Es werden zwei CSV Dateien erzeugt *jahr*_finmnanager.csv und *jahr*_finmnanager_bookings.csv. *jahr*_finmnanager.csv enthält die Gruppenübersicht und Gruppensalden mit den Spalten Jahr; Gruppenname; Anzahl Buchungen in der Gruppe; Saldo.
+*jahr*_finmnanager_bookings.csv enthält Buchungsdatum; Gruppenname; Vorgang; Buchungstext; Betrag.
 
 ## Lizenz
 
