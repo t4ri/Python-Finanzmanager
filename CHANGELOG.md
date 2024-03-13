@@ -2,6 +2,20 @@
 
 All notable changes to this project will be documented in this file. The format is based on [Keep a Changelog](http://keepachangelog.com/).
 
+## [1.1.0] - 2024-03-13
+
+### Added
+
+- poetry configuration
+- com_fm.ini.example
+
+### Changed
+
+- README.md
+
+### Fixed
+
+- com_fm.py - use OS independent file paths
 
 ## [1.0.2] - 2024-02-07
 
