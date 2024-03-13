@@ -1,4 +1,5 @@
 # version
+# t4ri.de, 03/2024 v1.1.0 see changelog
 # t4ri.de, 02/2024 v1.0.2 see changelog
 # t4ri.de, 02/2024 v1.0.1 see changelog
 # t4ri.de, 02/2023 v1.0.0
@@ -168,7 +169,7 @@ if len(files) == 0:
 # PDF auswerten
 for file in files:
     if (file.find(year) >= 0) and (file.find("Finanzreport") >= 0):
-        readPDF(dir + "\\" + file)
+        readPDF(os.path.join(dir, file))
 
 # csv Datenexport
 res = open(year + "_finmanger.csv", 'w')
