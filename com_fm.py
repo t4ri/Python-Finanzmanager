@@ -168,7 +168,7 @@ if len(files) == 0:
 # PDF auswerten
 for file in files:
     if (file.find(year) >= 0) and (file.find("Finanzreport") >= 0):
-        readPDF(dir + "\\" + file)
+        readPDF(os.path.join(dir, file))
 
 # csv Datenexport
 res = open(year + "_finmanger.csv", 'w')
